@@ -1,23 +1,3 @@
-"""
-STEP 5b - MODELING: FRAUD DETECTION CLASSIFICATION
-Nexus Bank Capstone | Team 4
-
-Model: Logistic Regression (baseline, interpretable) + Random Forest
-(stronger, handles class imbalance better) — compared side by side, as
-good practice for a fraud use case where explainability sometimes matters
-to the bank's risk team as much as raw accuracy.
-
-Because fraud is extremely rare (~0.17% of transactions, matching the real
-Kaggle dataset's imbalance), plain accuracy is misleading (a model that
-predicts "never fraud" would score 99.8% accuracy and be useless). We
-report Precision, Recall, F1, and ROC-AUC instead, and use class_weight
-="balanced" to compensate.
-
-Train/test split is stratified and time-respecting is not required here
-since transactions aren't being used to predict the future — but we still
-hold out 25% purely for testing, never touched during training.
-"""
-
 import os
 import sqlite3
 import pandas as pd

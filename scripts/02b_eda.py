@@ -1,14 +1,3 @@
-"""
-STEP 3.5 - EXPLORATORY DATA ANALYSIS (EDA)
-Nexus Bank Capstone | Team 4
-
-Run this AFTER 02_data_cleaning.py and BEFORE feature engineering / modeling.
-This was the piece our report was missing on first review: distribution
-plots, a missing-value summary, and a class-imbalance visualization done
-BEFORE we engineered features or trained anything, so we understand the
-raw shape of the data first.
-"""
-
 import os
 import pandas as pd
 import numpy as np

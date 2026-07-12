@@ -1,26 +1,3 @@
-"""
-STEP 3b - REAL DATABASE PARTITIONING (PostgreSQL)
-Nexus Bank Capstone | Team 4
-
-Our first draft used SQLite with a composite index on (ticker, date) and
-called that "our equivalent of partitioning." A reviewer correctly pushed
-back: an index and a partition are genuinely different mechanisms, and
-claiming one is "equivalent to" the other overstates it. This script
-fixes that by implementing REAL declarative partitioning in PostgreSQL --
-the brief's own example ("partitioning e.g. by date or asset").
-
-We partition stock_prices by RANGE on date, one partition per year. This
-is standard practice for time-series financial data: query planners can
-skip entire partitions (years) that don't match a query's date filter,
-which is a genuinely different and larger speedup than an index provides
-at scale, because the planner never even opens the excluded partitions.
-
-Run: python 03b_postgres_partitioning.py
-Requires: a running PostgreSQL instance and the connection details below
-          (we used a local Postgres 16 instance for this demonstration;
-          in production this would point at Nexus Bank's actual DB server).
-"""
-
 import os
 import pandas as pd
 import psycopg2
@@ -38,10 +15,6 @@ def connect():
 def create_partitioned_schema(conn):
     cur = conn.cursor()
     cur.execute("DROP TABLE IF EXISTS stock_prices CASCADE")
-    # The PARTITION BY RANGE clause is what makes this REAL partitioning,
-    # not an index -- Postgres physically routes each row to the correct
-    # child table based on the date column, and the query planner can
-    # skip child tables entirely when a query's date filter excludes them.
     cur.execute("""
         CREATE TABLE stock_prices (
             date DATE NOT NULL,
@@ -60,7 +33,6 @@ def create_partitioned_schema(conn):
             FOR VALUES FROM ('{year}-01-01') TO ('{year+1}-01-01');
         """)
     # Index within each partition on ticker, for fast per-ticker lookups
-    # (a partitioned table can still be indexed -- the two techniques stack)
     cur.execute("CREATE INDEX ON stock_prices (ticker, date);")
     conn.commit()
     print("Created stock_prices as a RANGE-partitioned table with 6 yearly partitions "

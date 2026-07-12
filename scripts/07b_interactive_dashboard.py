@@ -1,18 +1,3 @@
-"""
-STEP 7 - INTERACTIVE DASHBOARD (Plotly)
-Nexus Bank Capstone | Team 4
-
-The brief specifically asks for an "interactive dashboard", and matplotlib
-PNGs (Section 8's static charts) don't satisfy that on their own. This
-script builds a genuinely interactive, self-contained HTML dashboard using
-Plotly: hover tooltips, zoom/pan, a ticker toggle via the legend, and a
-dropdown to switch between price/volatility views. No server, no Dash
-install, no Tableau/Power BI license needed — just open the HTML file in
-any browser.
-
-Output: outputs/dashboard/nexus_bank_dashboard.html
-"""
-
 import os
 import sqlite3
 import numpy as np

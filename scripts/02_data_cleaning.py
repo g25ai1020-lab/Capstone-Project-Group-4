@@ -1,36 +1,3 @@
-"""
-STEP 2 - DATA CLEANING & PREPROCESSING
-Nexus Bank Capstone | Team 4
-
-What this script does, and WHY (this rationale goes straight into the report):
-
-1. Stock prices
-   - Parse dates, sort by ticker+date
-   - Fill missing calendar days (market holidays) using forward-fill for
-     price columns (standard practice: the market was closed, price didn't
-     change) — NOT interpolation, because interpolation would leak future
-     information backwards (look-ahead bias).
-   - Detect and remove bad ticks: any row where close price deviates more
-     than 40% from the previous day's close for that ticker (fat-finger /
-     erroneous prints). We flag and drop rather than "correct" them because
-     we cannot know the true value.
-   - Standardise dtypes: date -> datetime64, all price cols -> float64.
-
-2. Macro indicators
-   - Already monthly and clean in our case; we still enforce dtypes and
-     forward-fill in case of any gaps, since macro data lags real-world
-     reporting by design.
-
-3. Transaction (fraud) data
-   - Check for duplicate rows, nulls -> none found in this dataset by design
-     (mirrors the real Kaggle dataset, which is pre-cleaned), but we still
-     run the checks and log them, because a real submission must show the
-     check was performed, not just assume it.
-
-Outputs a "data quality report" (data_quality_report.md) documenting every
-decision, exactly as required by the brief.
-"""
-
 import os
 import pandas as pd
 import numpy as np

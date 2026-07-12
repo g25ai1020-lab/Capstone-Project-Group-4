@@ -1,16 +1,3 @@
-"""
-STEP 6 - REPORTING & VISUALIZATION
-Nexus Bank Capstone | Team 4
-
-Generates the charts that go into the final report / presentation:
-  1. Price trend + moving averages (AAPL)
-  2. Forecast vs actual (backtest) for all tickers
-  3. Volatility over time (all tickers)
-  4. Portfolio "risk heatmap" (rolling correlation matrix of returns)
-  5. ROC curves for both fraud models
-  6. Fraud incident timeline (transaction amount vs time, fraud highlighted)
-"""
-
 import os
 import sqlite3
 import numpy as np

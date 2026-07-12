@@ -1,29 +1,3 @@
-"""
-STEP 1 - DATA ACQUISITION
-Nexus Bank Capstone | Team 4
-
-This script has TWO modes:
-
-1. LIVE MODE (use this on your own laptop / college wifi where internet is open):
-   - Pulls real historical S&P 500 constituent prices from Yahoo Finance (yfinance)
-   - Pulls real macro indicators (GDP, CPI, Fed Funds Rate) from FRED
-   - Reads the Kaggle "Credit Card Fraud Detection" CSV (download manually from
-     kaggle.com/mlg-ulb/creditcardfraud and place in data/raw/creditcard.csv)
-
-2. SAMPLE MODE (default, used to build this submission):
-   - Generates a statistically realistic synthetic dataset with the SAME schema,
-     SAME data quality problems (missing days, outliers, mixed timestamp formats)
-     that the real sources have, so every downstream script (cleaning, feature
-     engineering, modeling) runs exactly the way it would on real data.
-   - This was necessary because our working environment did not have open
-     internet access to Yahoo Finance / FRED / Kaggle at the time of writing.
-   - Documented honestly in the final report (Data Strategy / Limitations section).
-
-Run:
-    python 01_data_acquisition.py --mode sample     # what we used
-    python 01_data_acquisition.py --mode live        # run this yourself before final submission
-"""
-
 import argparse
 import os
 import numpy as np
@@ -33,12 +7,10 @@ RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 os.makedirs(RAW_DIR, exist_ok=True)
 
 TICKERS = ["AAPL", "MSFT", "JPM", "XOM", "GOOGL"]
-FX_PAIRS = ["EURUSD=X", "GBPUSD=X", "USDJPY=X"]   # Yahoo Finance FX tickers (brief explicitly asks for FX rates)
+FX_PAIRS = ["EURUSD=X", "GBPUSD=X", "USDJPY=X"]  
 
+# LIVE MODE 
 
-# ---------------------------------------------------------------------------
-# LIVE MODE — real code, run this on a machine with internet access
-# ---------------------------------------------------------------------------
 def fetch_live():
     import yfinance as yf
     import pandas_datareader.data as web
@@ -81,27 +53,20 @@ def fetch_live():
         all_fx.append(df)
     fx = pd.concat(all_fx, ignore_index=True)
     fx.to_csv(os.path.join(RAW_DIR, "fx_rates_raw.csv"), index=False)
-    # 2. Macro indicators from FRED (pandas_datareader uses FRED's keyless
-    #    CSV endpoint, fredgraph.csv, NOT the key-gated api.stlouisfed.org
-    #    REST API -- no API key needed for this call)
+    # 2. Macro indicators from FRED 
     macro = web.DataReader(["GDP", "CPIAUCSL", "FEDFUNDS"], "fred", start, end)
     macro.reset_index(inplace=True)
     macro.rename(columns={"DATE": "date"}, inplace=True)
     macro.to_csv(os.path.join(RAW_DIR, "macro_indicators_raw.csv"), index=False)
 
     # 3. Kaggle credit card fraud dataset
-    # Manually download from https://www.kaggle.com/mlg-ulb/creditcardfraud
-    # and place at data/raw/creditcard.csv (284,807 rows, 31 columns, ~144MB)
     fraud_path = os.path.join(RAW_DIR, "creditcard.csv")
     if not os.path.exists(fraud_path):
         print("Kaggle fraud CSV not found. Please download manually and re-run.")
 
     print("LIVE fetch complete.")
 
-
-# ---------------------------------------------------------------------------
-# SAMPLE MODE — reproducible synthetic data with realistic flaws
-# ---------------------------------------------------------------------------
+# SAMPLE MODE 
 def fetch_sample():
     rng = np.random.default_rng(42)
 
@@ -159,9 +124,7 @@ def fetch_sample():
     macro = pd.DataFrame({"date": months, "GDP": gdp, "CPIAUCSL": cpi, "FEDFUNDS": fedfunds})
     macro.to_csv(os.path.join(RAW_DIR, "macro_indicators_raw.csv"), index=False)
 
-    # 3. Credit-card-style transaction dataset (schema modeled on the
-    #    Kaggle "Credit Card Fraud Detection" dataset: anonymised PCA
-    #    features V1-V10, Amount, Time, Class)
+    # 3. Credit-card-style transaction dataset 
     n_txn = 50_000
     fraud_rate = 0.0017  # matches real-world class imbalance (~0.17%)
     n_fraud = int(n_txn * fraud_rate)

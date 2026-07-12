@@ -1,15 +1,3 @@
-"""
-STEP 5a - MODELING: TIME-SERIES PRICE FORECASTING
-Nexus Bank Capstone | Team 4
-
-Model: ARIMA(5,1,0) per ticker on closing price.
-Validation: walk-forward backtest — train on all data up to a cutoff date,
-forecast the next 30 trading days, compare to actual. This avoids
-look-ahead bias (we never let the model see the future).
-
-Metrics reported: MAE, RMSE, MAPE.
-"""
-
 import os
 import sqlite3
 import warnings

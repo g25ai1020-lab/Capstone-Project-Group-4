@@ -1,27 +1,3 @@
-"""
-STEP 4 - FEATURE ENGINEERING
-Nexus Bank Capstone | Team 4
-
-Financial indicators computed per ticker (all causal / no look-ahead —
-each value only uses data up to and including that day):
-
-  - MA7, MA30        : 7-day and 30-day simple moving averages
-  - EMA12, EMA26      : exponential moving averages (inputs to MACD-style analysis)
-  - Bollinger Bands   : MA20 +/- 2*rolling_std20
-  - RSI-14            : Relative Strength Index, 14-day window
-  - Volatility20       : 20-day rolling std of daily returns (annualised)
-
-IMPORTANT — look-ahead bias check:
-  All rolling calculations use pandas .rolling()/.ewm(), which by
-  construction only look backward. We explicitly verified this (this was
-  the exact bug our teammate caught in Week 4 real work — an earlier RSI
-  draft used .rolling(center=True) by mistake, which peeks into the
-  future. Fixed here by using default centered=False).
-
-Transaction aggregates:
-  - total amount, transaction count, average amount per account per day
-"""
-
 import os
 import sqlite3
 import pandas as pd
