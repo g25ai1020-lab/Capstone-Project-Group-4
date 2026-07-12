@@ -1,0 +1,10 @@
+# Datasets
+data/raw/*.csv
+data/clean/*.csv
+
+# Database
+db/*.db
+
+# Python
+__pycache__/
+*.pyc

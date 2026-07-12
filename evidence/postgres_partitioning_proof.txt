@@ -1,0 +1,26 @@
+Created stock_prices as a RANGE-partitioned table with 6 yearly partitions (stock_prices_2020 .. stock_prices_2025), plus a (ticker, date) index on top.
+Loaded 7,170 rows into the partitioned table. Postgres automatically routed each row to the correct yearly partition based on its date.
+
+Row counts per physical partition (proof partitioning is real, not simulated):
+  stock_prices_2020: 1,310 rows
+  stock_prices_2021: 1,305 rows
+  stock_prices_2022: 1,300 rows
+  stock_prices_2023: 1,300 rows
+  stock_prices_2024: 1,310 rows
+  stock_prices_2025: 645 rows
+
+Query plan (EXPLAIN ANALYZE) for a 2024-only, AAPL-only query, partitioned table:
+Index Scan using stock_prices_2024_ticker_date_idx on stock_prices_2024 stock_prices  (cost=0.28..8.30 rows=1 width=76) (actual time=0.019..0.044 rows=262 loops=1)
+  Index Cond: ((ticker = 'AAPL'::text) AND (date >= '2024-01-01'::date) AND (date < '2025-01-01'::date))
+Planning Time: 0.102 ms
+Execution Time: 0.058 ms
+
+Partition pruning confirmed (only 2024 partition scanned, others skipped): True
+
+Same query against a flat (non-partitioned, but still indexed) table:
+Index Scan using stock_prices_flat_ticker_date_idx on stock_prices_flat  (cost=0.28..8.30 rows=1 width=76) (actual time=0.015..0.058 rows=262 loops=1)
+  Index Cond: ((ticker = 'AAPL'::text) AND (date >= '2024-01-01'::date) AND (date < '2025-01-01'::date))
+Planning Time: 0.082 ms
+Execution Time: 0.071 ms
+
+Both use the (ticker, date) index, so at our modest data volume the timing difference is small -- the real benefit of partitioning shows up at much larger scale (millions of rows per year), where the planner skips reading entire years' worth of data pages instead of just filtering rows within one table. We're including this honest comparison rather than overstating the speedup at our current data size.

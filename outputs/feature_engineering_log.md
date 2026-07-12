@@ -1,0 +1,2 @@
+Price feature table: 9,770 rows x 16 columns (MA7, MA30, EMA12, EMA26, Bollinger Bands, RSI14, Volatility20)
+Transaction daily aggregate table: 27,095 account-day rows (total_amount, txn_count, avg_amount, fraud_flag_count)
