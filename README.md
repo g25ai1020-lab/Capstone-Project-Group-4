@@ -23,7 +23,7 @@ The primary objectives of this project are:
 - Demonstrate scalable data engineering practices for banking applications.
 
 ### Key Features
-Data Engineering:
+## Data Engineering:
 
 - Automated financial data acquisition
 - Batch and streaming ingestion workflows
@@ -34,7 +34,7 @@ Data Engineering:
 - Database indexing and optimization
 - PostgreSQL table partitioning
 
-Financial Analytics:
+## Financial Analytics:
 
 - Moving Average (MA7, MA30)
 - Exponential Moving Average (EMA12, EMA26)
@@ -44,13 +44,13 @@ Financial Analytics:
 - Portfolio Risk Analysis
 - Correlation Analysis
 
-Machine Learning
+## Machine Learning
 - Stock Price Forecasting
 - ARIMA Time-Series Forecasting
 - Walk-forward Validation
 - MAE, RMSE, MAPE Evaluation
 
-Fraud Detection
+## Fraud Detection
 
 - Logistic Regression
 - Random Forest Classification
@@ -59,7 +59,7 @@ Fraud Detection
 - F1 Score
 - ROC-AUC Evaluation
 
-Dashboard & Visualization
+## Dashboard & Visualization
 
 - Interactive Plotly Dashboard
 - Stock Price Trends
@@ -69,11 +69,11 @@ Dashboard & Visualization
 - Portfolio Analytics
 
 ### Technologies Used
-Programming:
+## Programming:
 - Python
 - SQL
 
-Libraries:
+## Libraries:
 - Pandas
 - NumPy
 - Scikit-Learn
@@ -83,11 +83,11 @@ Libraries:
 - Matplotlib
 - Seaborn
 
-Database
+## Database
 - SQLite
 - PostgreSQL
 
-Tools
+## Tools
 - Git
 - GitHub
 - Jupyter Notebook
@@ -174,7 +174,7 @@ Business Insights & Recommendations
 - [ ] Ask Claude to update the report text (Sections 4, 7) to reflect FX/streaming/partitioning
 
 
-Business Impact:
+## Business Impact:
 This solution demonstrates how modern data engineering and machine learning techniques can be leveraged by financial institutions to
 - Improve portfolio monitoring
 - Enhance fraud detection capabilities
@@ -183,7 +183,7 @@ This solution demonstrates how modern data engineering and machine learning tech
 - Enable data-driven decision-making
 The project provides a scalable foundation for future banking analytics initiatives.
 
-Future Enhancements:
+## Future Enhancements:
 - LSTM-based stock forecasting
 - Real-time streaming analytics
 - Streamlit-based live dashboard
