@@ -1,6 +1,7 @@
 # Nexus Bank Financial Analytics Capstone — Team 4
 
-## Team Members4 5| Name | Roll Number | Email 
+## Team Members
+ 
 |--------|-------------|---------|
 Devabhakthuni Vijay Sai Krishna | G25AI1016 | g25ai1016@iitj.ac.in 
 Divya Daiyya | G25AI1017 | g25ai1017@iitj.ac.in |
@@ -9,7 +10,129 @@ Gautam Pant | G25AI1019 | g25ai1019@iitj.ac.in |
 Gundlapalli Venkata Suneel Kumar | G25AI1020 | g25ai1020@iitj.ac.in |
 
 ## Project Overview
-**Financial Analytics and Modeling Project for Nexus Bank** is an end-to-end financial data engineering and analytics platform developed as part of a capstone project. The solution focuses on building scalable data pipelines for collecting, processing, storing, and analyzing large-scale financial and transactional datasets.16 17The project simulates a real-world banking analytics environment, enabling portfolio analysis, financial modeling, and fraud detection through modern data engineering practices and machine learning techniques.18 19### Key Features20 21- Data ingestion from stock market, cryptocurrency, and macroeconomic data sources22- Financial transaction data processing and fraud analysis23- Data cleaning, normalization, and validation24- Automated ETL/ELT pipelines25- Financial indicator computation (RSI, Moving Average, MACD, Volatility, Bollinger Bands)26- Portfolio performance analysis27- Fraud detection and anomaly identification28- Database partitioning and optimized storage strategies29- Automated reporting and workflow orchestration30 31### Technologies Used32 33- Python34- Pandas35- NumPy36- Scikit-Learn37- Apache Spark (if applicable)38- SQL39- PostgreSQL/MySQL40- Yahoo Finance API41- Kaggle Datasets42- Jupyter Notebook43- Git & GitHub
+
+The primary objectives of this project are:
+
+- Build automated financial data ingestion pipelines.
+- Clean and validate financial and transaction datasets.
+- Engineer financial indicators and analytical features.
+- Forecast stock price movements using time-series models.
+- Detect fraudulent transactions using machine learning.
+- Store and manage large datasets efficiently.
+- Create interactive dashboards for business insights.
+- Demonstrate scalable data engineering practices for banking applications.
+
+### Key Features
+Data Engineering:
+
+- Automated financial data acquisition
+- Batch and streaming ingestion workflows
+- Data quality validation
+- Missing value treatment
+- Duplicate removal
+- Outlier detection
+- Database indexing and optimization
+- PostgreSQL table partitioning
+
+Financial Analytics:
+
+- Moving Average (MA7, MA30)
+- Exponential Moving Average (EMA12, EMA26)
+- Relative Strength Index (RSI-14)
+- Bollinger Bands
+- Volatility Indicators
+- Portfolio Risk Analysis
+- Correlation Analysis
+
+Machine Learning
+- Stock Price Forecasting
+- ARIMA Time-Series Forecasting
+- Walk-forward Validation
+- MAE, RMSE, MAPE Evaluation
+
+Fraud Detection
+
+- Logistic Regression
+- Random Forest Classification
+- Precision
+- Recall
+- F1 Score
+- ROC-AUC Evaluation
+
+Dashboard & Visualization
+
+- Interactive Plotly Dashboard
+- Stock Price Trends
+- Risk Heatmaps
+- Volatility Analysis
+- Fraud Activity Timeline
+- Portfolio Analytics
+
+### Technologies Used
+Programming:
+- Python
+- SQL
+
+Libraries:
+- Pandas
+- NumPy
+- Scikit-Learn
+- Statsmodels
+- Plotly
+- yfinance
+- Matplotlib
+- Seaborn
+
+Database
+- SQLite
+- PostgreSQL
+
+Tools
+- Git
+- GitHub
+- Jupyter Notebook
+
+## Solution Architecture
+
+Data Sources
+│
+├── Yahoo Finance
+├── FRED
+├── Kaggle Fraud Dataset
+│
+▼
+Data Acquisition Layer
+│
+▼
+Data Cleaning & Validation
+│
+▼
+Feature Engineering
+│
+├── Moving Averages
+├── RSI
+├── Volatility
+├── Bollinger Bands
+├── EMA Indicators
+│
+▼
+Database Storage
+│
+├── SQLite
+└── PostgreSQL Partitioning
+│
+▼
+Machine Learning Models
+│
+├── ARIMA Forecasting
+├── Logistic Regression
+└── Random Forest
+│
+▼
+Analytics Dashboard
+│
+▼
+Business Insights & Recommendations
 
 ## Run order (scripts/ folder):
 1. 01_data_acquisition.py        (--mode sample | --mode live) -- now includes FX rates
@@ -49,3 +172,22 @@ Gundlapalli Venkata Suneel Kumar | G25AI1020 | g25ai1020@iitj.ac.in |
 - [ ] Run 01_data_acquisition.py --mode live if possible and update metrics
 - [ ] Fill in the report's screenshot placeholders
 - [ ] Ask Claude to update the report text (Sections 4, 7) to reflect FX/streaming/partitioning
+
+
+Business Impact:
+This solution demonstrates how modern data engineering and machine learning techniques can be leveraged by financial institutions to
+- Improve portfolio monitoring
+- Enhance fraud detection capabilities
+- Support risk management
+- Automate financial analytics workflows
+- Enable data-driven decision-making
+The project provides a scalable foundation for future banking analytics initiatives.
+
+Future Enhancements:
+- LSTM-based stock forecasting
+- Real-time streaming analytics
+- Streamlit-based live dashboard
+- Advanced fraud detection models
+- Cloud-native deployment
+- MLOps pipeline automation
+- Enterprise-scale data lake integration
